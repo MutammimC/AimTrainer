@@ -1,18 +1,68 @@
 #include "raylib.h"
 #include <iostream>
+#include "enemy.h"
+#include <cstdlib>
+#include <chrono>
+#include <thread>
+
+using namespace std;
 
 int main()
-{
-	const int ScreenWidth = 1920;
-	const int ScreenHeight = 1080;
-
-	InitWindow(ScreenWidth, ScreenHeight, "AimTrainer");
-	SetTargetFPS(60);
-
-	do
 	{
-		BeginDrawing();
+		double spawnTimer = 0.0;
+		double spawnInterval = 0.85;
 
-		EndDrawing();
-	}while(WindowShouldClose() == false)
-}
+		const int ScreenWidth = 1920;
+		const int ScreenHeight = 1080;
+		int Rectangle_x;
+		int Rectangle_y;
+		const int Rectangle_Width = 100;
+		const int Rectangle_Height = 100;
+		int Point_Counter = 0;
+
+		InitWindow(ScreenWidth, ScreenHeight, "AimTrainer");
+		SetTargetFPS(60);
+
+		Enemy Enemy1;
+
+
+		auto startTime = chrono::high_resolution_clock::now();
+		double delayInSeconds = 1.0;
+
+		do
+		{
+			BeginDrawing();
+			double deltaTime = GetFrameTime();
+			spawnTimer += deltaTime;
+
+			Rectangle_x = rand() % (GetScreenWidth() - Enemy1.Get_Rectangle_Width());
+			Rectangle_y = rand() % (GetScreenWidth() - Enemy1.Get_Rectangle_Height());
+
+
+
+			if (spawnTimer >= spawnInterval) {
+				ClearBackground(BLACK);
+				Enemy1.Draw(Rectangle_x, Rectangle_y, Rectangle_Width, Rectangle_Height);
+				spawnTimer = 0.0;
+			}
+
+
+
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && Enemy1.Is_Mouse_On_Enemy(GetMouseX(), GetMouseY()))
+			{
+				Point_Counter += 1;
+				cout << "You gained a point!" << endl;
+				Enemy1.Set_Rectangle_Height(0);
+				Enemy1.Set_Rectangle_Width(0);
+				//Add music so player knows they made a point
+				//Animation where red square turns a different colour, so user knows they got a point
+				ClearBackground(BLACK);
+
+			}
+			Enemy1.Set_Rectangle_Height(0);
+			Enemy1.Set_Rectangle_Width(0);
+			EndDrawing();
+		} while (WindowShouldClose() == false);
+		cout << "You got " << Point_Counter << " Points!" << endl;
+		return 0;
+	}
