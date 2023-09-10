@@ -6,5 +6,5 @@
   If clicked in a fast manner, the square turns completely blue, if clicked in time but not in the "fast" time frame it just flickers blue.
 
   This is my first project using raylib, and as of now, I'm actively working on it!
-***/
+
   
