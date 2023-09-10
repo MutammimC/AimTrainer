@@ -11,13 +11,22 @@ private:
 	int Rectangle_Height = 100;
 
 public:
+	int Get_Rectangle_x() const;
+	void Set_Rectangle_x(int Input_x);
+
+	int Get_Rectangle_y() const;
+	void Set_Rectangle_y(int Input_y);
 
 	int Get_Rectangle_Width() const;
 	void Set_Rectangle_Width(int Width);
+
 	int Get_Rectangle_Height() const;
 	void Set_Rectangle_Height(int Height);
+
 	void Draw(int x, int y, int Input_Width, int Input_Height);
+	void Draw2(int x, int y, int Input_Width, int Input_Height);
 	bool Is_Mouse_On_Enemy(int Mouse_Position_x, int Mouse_Position_y);
+
 	void Update();
 	
 };

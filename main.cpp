@@ -4,7 +4,8 @@
 #include <cstdlib>
 #include <chrono>
 #include <thread>
-
+#include "TopMenu.h"
+#include<time.h>
 using namespace std;
 
 int main()
@@ -24,21 +25,25 @@ int main()
 		SetTargetFPS(60);
 
 		Enemy Enemy1;
+		TopMenu TopMenu;
 
 
 		auto startTime = chrono::high_resolution_clock::now();
 		double delayInSeconds = 1.0;
 
+		srand(time(0));
 		do
 		{
 			BeginDrawing();
 			double deltaTime = GetFrameTime();
 			spawnTimer += deltaTime;
 
-			Rectangle_x = rand() % (GetScreenWidth() - Enemy1.Get_Rectangle_Width());
-			Rectangle_y = rand() % (GetScreenWidth() - Enemy1.Get_Rectangle_Height());
-
-
+			Rectangle_x = (rand() % (GetScreenWidth() - Enemy1.Get_Rectangle_Width())) + 1;
+			Rectangle_y = (rand() % (GetScreenWidth() - Enemy1.Get_Rectangle_Height())) + TopMenu.Get_Menu_Height();
+			
+			TopMenu.Display_Menu();
+			TopMenu.Display_FPS(25, 25);
+			TopMenu.Display_Points(Point_Counter);
 
 			if (spawnTimer >= spawnInterval) {
 				ClearBackground(BLACK);
@@ -52,6 +57,7 @@ int main()
 			{
 				Point_Counter += 1;
 				cout << "You gained a point!" << endl;
+				Enemy1.Draw2(Enemy1.Get_Rectangle_x(), Enemy1.Get_Rectangle_y(), 100, 100);
 				Enemy1.Set_Rectangle_Height(0);
 				Enemy1.Set_Rectangle_Width(0);
 				//Add music so player knows they made a point
@@ -59,10 +65,10 @@ int main()
 				ClearBackground(BLACK);
 
 			}
-			Enemy1.Set_Rectangle_Height(0);
-			Enemy1.Set_Rectangle_Width(0);
+			//Enemy1.Set_Rectangle_Height(0);
+			//Enemy1.Set_Rectangle_Width(0);
 			EndDrawing();
-		} while (WindowShouldClose() == false);
+		} while (!WindowShouldClose());
 		cout << "You got " << Point_Counter << " Points!" << endl;
 		return 0;
 	}
