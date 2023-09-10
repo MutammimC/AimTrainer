@@ -1,5 +1,5 @@
-# AimTrainer
-/*** 
+# About Aim Trainer
+ 
   Hello!
   This program aims to help users get better at their aiming skills.
   This program spawns 100 by 100 pixels on display at random coordinates on the screen. 
