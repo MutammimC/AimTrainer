@@ -30,16 +30,18 @@ int main()
 
 		auto startTime = chrono::high_resolution_clock::now();
 		double delayInSeconds = 1.0;
-
 		srand(time(0));
+
+
 		do
 		{
+			
 			BeginDrawing();
 			double deltaTime = GetFrameTime();
 			spawnTimer += deltaTime;
 
 			Rectangle_x = (rand() % (GetScreenWidth() - Enemy1.Get_Rectangle_Width())) + 1;
-			Rectangle_y = (rand() % (GetScreenWidth() - Enemy1.Get_Rectangle_Height())) + TopMenu.Get_Menu_Height();
+			Rectangle_y = (rand() % (GetScreenHeight() - Enemy1.Get_Rectangle_Height()  - TopMenu.Get_Menu_Height())) + TopMenu.Get_Menu_Height();
 			
 			TopMenu.Display_Menu();
 			TopMenu.Display_FPS(25, 25);
@@ -58,6 +60,7 @@ int main()
 				Point_Counter += 1;
 				cout << "You gained a point!" << endl;
 				Enemy1.Draw2(Enemy1.Get_Rectangle_x(), Enemy1.Get_Rectangle_y(), 100, 100);
+				
 				Enemy1.Set_Rectangle_Height(0);
 				Enemy1.Set_Rectangle_Width(0);
 				//Add music so player knows they made a point
@@ -70,5 +73,6 @@ int main()
 			EndDrawing();
 		} while (!WindowShouldClose());
 		cout << "You got " << Point_Counter << " Points!" << endl;
+		cout << "THIS NUMBERRRRRRRRRRRRRRR " << (GetScreenHeight() - Enemy1.Get_Rectangle_Height() - TopMenu.Get_Menu_Height()) << endl;
 		return 0;
 	}
