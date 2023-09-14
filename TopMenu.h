@@ -6,7 +6,7 @@ using namespace std;
 class TopMenu
 {
 private:
-	 int Menu_Width = 1920;
+	int Menu_Width = 1920;
 	int Menu_Height = 216; // 20%
 	string Points_Text = "Points";
 
@@ -19,6 +19,7 @@ public:
 
 
 	void Display_Menu();
-	void Display_FPS(int pos_x, int pos_y);
+	void Display_FPS_And_Time(int pos_x, int pos_y, int Time);
+	
 	void Display_Points(int points);
 };

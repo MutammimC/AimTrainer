@@ -47,8 +47,9 @@ void Enemy::Draw(int Input_Rectangle_x, int Input_Rectangle_y, int Input_Width, 
 	this->Rectangle_y = Input_Rectangle_y;
 	this->Rectangle_Width = Input_Width;
 	this->Rectangle_Height = Input_Height;
-	DrawRectangle(Rectangle_x, Rectangle_y, Rectangle_Width, Rectangle_Height, RED);
+	DrawRectangle(Rectangle_x, Rectangle_y, Input_Width, Input_Height, RED);
 }
+
 void Enemy::Draw2(int Input_Rectangle_x, int Input_Rectangle_y, int Input_Width, int Input_Height)
 {
 	DrawRectangle(Input_Rectangle_x, Input_Rectangle_y, Input_Width, Input_Height, BLUE);
@@ -56,6 +57,7 @@ void Enemy::Draw2(int Input_Rectangle_x, int Input_Rectangle_y, int Input_Width,
 	this->Rectangle_y = Input_Rectangle_y;
 	this->Rectangle_Width = Input_Width;
 	this->Rectangle_Height = Input_Height;
+	
 }
 
 
