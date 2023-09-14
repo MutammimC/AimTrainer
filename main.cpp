@@ -1,11 +1,12 @@
 #include "raylib.h"
 #include <iostream>
-#include "enemy.h"
 #include <cstdlib>
 #include <chrono>
 #include <thread>
 #include "TopMenu.h"
+#include "enemy.h"
 #include<time.h>
+
 using namespace std;
 
 int main()
@@ -25,6 +26,7 @@ int main()
 
 
 		InitWindow(ScreenWidth, ScreenHeight, "AimTrainer");
+		InitAudioDevice();
 		SetTargetFPS(60);
 
 
@@ -34,8 +36,10 @@ int main()
 
 		auto startTime = chrono::high_resolution_clock::now();
 		double delayInSeconds = 1.0;
-		
 
+		Sound Ding;
+		Ding = LoadSound("AimTrainer_Resources/4537996643401728.wav");
+		
 
 		do
 		{
@@ -63,7 +67,7 @@ int main()
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && Enemy1.Is_Mouse_On_Enemy(GetMouseX(), GetMouseY()))
 			{
 				SwapScreenBuffer();
-
+				PlaySound(Ding);
 				Point_Counter += 1;
 
 				cout << "You gained a point!" << endl;
@@ -75,11 +79,15 @@ int main()
 				Enemy1.Set_Rectangle_Width(0);
 				//Add music so player knows they made a point
 				//Animation where red square turns a different colour, so user knows they got a point
+				
 			}
 			
 			EndDrawing();
 		} while (!WindowShouldClose());
 		
 		cout << "You got " << Point_Counter << " Points!" << endl;
+		UnloadSound(Ding);
+		CloseAudioDevice();
+		CloseWindow();
 		return 0;
 	}
