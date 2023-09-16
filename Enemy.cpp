@@ -76,5 +76,5 @@ bool Enemy::Is_Mouse_On_Enemy(int Mouse_Position_x, int Mouse_Position_y)
 
 void Enemy::Update()
 {
-	//When movement is added
+	//If movement is added
 }

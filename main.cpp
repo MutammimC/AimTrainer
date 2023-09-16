@@ -3,14 +3,21 @@
 #include <cstdlib>
 #include <chrono>
 #include <thread>
+#include<time.h>
+
 #include "TopMenu.h"
 #include "enemy.h"
-#include<time.h>
+#include "GameData.h"
+
 
 using namespace std;
 
+
+
 int main()
 	{
+
+	
 		double spawnTimer = 0.0;
 		double spawnInterval = 0.85;
 
@@ -24,6 +31,7 @@ int main()
 		const int Rectangle_Height = 100;
 		int Point_Counter = 0;
 
+		int Total_Time_Passed;
 
 		InitWindow(ScreenWidth, ScreenHeight, "AimTrainer");
 		InitAudioDevice();
@@ -61,6 +69,7 @@ int main()
 				ClearBackground(BLACK);
 				Enemy1.Draw(Rectangle_x, Rectangle_y, Rectangle_Width, Rectangle_Height);
 				spawnTimer = 0.0;
+				// Add an average points/time 
 			}
 
 
@@ -77,15 +86,20 @@ int main()
 				
 				Enemy1.Set_Rectangle_Height(0);
 				Enemy1.Set_Rectangle_Width(0);
-				//Add music so player knows they made a point
-				//Animation where red square turns a different colour, so user knows they got a point
+				//Maybe Add a texture?
 				
 			}
 			
 			EndDrawing();
 		} while (!WindowShouldClose());
+		Total_Time_Passed = GetTime();
 		
-		cout << "You got " << Point_Counter << " Points!" << endl;
+		
+		cout << "You got " << Point_Counter << " Points in " << Total_Time_Passed << " Seconds" << endl;
+//Do Game Data Stuff
+		GameData GameData(Point_Counter, Total_Time_Passed);
+
+//Ending any raylib operations
 		UnloadSound(Ding);
 		CloseAudioDevice();
 		CloseWindow();
